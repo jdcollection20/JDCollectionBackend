@@ -6,7 +6,7 @@ import { env } from "../config/env.js";
 const cookieOptions = {
   httpOnly: true,
   secure: env.NODE_ENV === "production",
-  sameSite: env.COOKIE_SAME_SITE,
+  sameSite: env.NODE_ENV === "production" ? "none" : env.COOKIE_SAME_SITE,
   maxAge: 7 * 24 * 60 * 60 * 1000,
   path: "/"
 };
@@ -24,7 +24,7 @@ export async function login(req, res) {
 }
 
 export function logout(req, res) {
-  res.clearCookie("admin_token", { httpOnly: true, secure: env.NODE_ENV === "production", sameSite: env.COOKIE_SAME_SITE, path: "/" });
+  res.clearCookie("admin_token", { httpOnly: true, secure: env.NODE_ENV === "production", sameSite: env.NODE_ENV === "production" ? "none" : env.COOKIE_SAME_SITE, path: "/" });
   res.json({ message: "Logged out" });
 }
 

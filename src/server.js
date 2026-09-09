@@ -15,7 +15,6 @@ import notificationRoutes from "./routes/notifications.js";
 import adminRoutes from "./routes/admin.js";
 import { notFound, errorHandler } from "./middleware/error.js";
 
-await connectDB();
 const app = express();
 
 app.set("trust proxy", 1);
@@ -26,13 +25,7 @@ app.use(express.json({ limit: "2mb" }));
 app.use(cookieParser());
 app.use(morgan(env.NODE_ENV === "production" ? "combined" : "dev"));
 
-app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    ok: true,
-    service: "toy-shop-api",
-    timestamp: new Date().toISOString()
-  });
-});
+app.get("/api/health", (req, res) => res.json({ ok: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
@@ -44,4 +37,8 @@ app.use("/api/admin", adminRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(env.PORT, () => console.log(`API listening on ${env.PORT}`));
+const server = app.listen(env.PORT, () => console.log(`API listening on ${env.PORT}`));
+
+connectDB().catch((error) => {
+  console.error("MongoDB connection failed:", error.message);
+});
