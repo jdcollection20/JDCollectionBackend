@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { list, create, update, remove } from "../controllers/categoryController.js";
+import { requireAuth } from "../middleware/auth.js";
+import { mediaUpload } from "../middleware/upload.js";
+const r = Router();
+r.get("/", list);
+r.post("/", requireAuth, mediaUpload.single("image"), create);
+r.put("/:id", requireAuth, mediaUpload.single("image"), update);
+r.delete("/:id", requireAuth, remove);
+export default r;
