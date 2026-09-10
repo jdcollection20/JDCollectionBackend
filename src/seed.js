@@ -27,7 +27,7 @@ for (let i = 0; i < categoryNames.length; i++) {
 
 await ShopSettings.findOneAndUpdate(
   { singleton: "main" },
-  { singleton: "main", shopName: "Happy Toys", description: "A friendly neighborhood toy shop." },
+  { singleton: "main", shopName: "JD COLLECTION", description: "A friendly neighborhood toy shop." },
   { upsert: true }
 );
 

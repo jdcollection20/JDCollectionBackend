@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
   singleton: { type: String, default: "main", unique: true },
-  shopName: { type: String, default: "Happy Toys" },
+  shopName: { type: String, default: "JD COLLECTION" },
   logo: { publicId: String, secureUrl: String },
   description: { type: String, default: "" },
   address: { type: String, default: "" },
@@ -13,7 +13,7 @@ const schema = new mongoose.Schema({
   socialLinks: { type: Map, of: String, default: {} },
   heroContent: {
     title: { type: String, default: "Big fun starts here!" },
-    description: { type: String, default: "Discover toys kids love, with fresh offers every day." },
+    description: { type: String, default: "Discover toys, watches, perfumes and gifts with fresh offers every day." },
     image: { publicId: String, secureUrl: String }
   }
 }, { timestamps: true });

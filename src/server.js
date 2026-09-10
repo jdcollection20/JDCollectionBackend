@@ -13,6 +13,8 @@ import settingsRoutes from "./routes/settings.js";
 import pushRoutes from "./routes/push.js";
 import notificationRoutes from "./routes/notifications.js";
 import adminRoutes from "./routes/admin.js";
+import orderRoutes from "./routes/orders.js";
+import returnRoutes from "./routes/returns.js";
 import { notFound, errorHandler } from "./middleware/error.js";
 
 const app = express();
@@ -33,6 +35,8 @@ app.use("/api/settings", settingsRoutes);
 app.use("/api/push", pushRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/returns", returnRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
